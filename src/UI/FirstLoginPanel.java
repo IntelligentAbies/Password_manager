@@ -9,10 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FirstLoginPanel extends JPanel {
-    private JLabel label;
-    private JButton btnLogin;
-    private JPasswordField txtPassword;
-    private JPasswordField txtPasswordConfirm;
+    protected JLabel label;
+    protected JButton btnLogin;
+    protected JPasswordField txtPassword;
+    protected JPasswordField txtPasswordConfirm;
+    protected FirstLoginListener firstLoginListener;
 
     public FirstLoginPanel() {
         //Layout in colonna
@@ -46,10 +47,10 @@ public class FirstLoginPanel extends JPanel {
         //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-
+        firstLoginListener = new FirstLoginListener();
         btnLogin = new JButton("Login");
         btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnLogin.addActionListener(new LoginListener());
+        btnLogin.addActionListener(firstLoginListener);
         add(btnLogin);
 
         // Glue sotto per spingere il gruppo verso il centro
@@ -61,7 +62,7 @@ public class FirstLoginPanel extends JPanel {
         setPreferredSize (new Dimension(850, 400));
     }
 
-    private class LoginListener implements ActionListener {
+    private class FirstLoginListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String password = txtPassword.getText();
             String passwordConfirm = txtPasswordConfirm.getText();
