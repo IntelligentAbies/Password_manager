@@ -66,8 +66,8 @@ public class Credential {
         this.password = password;
     }
 
-    public void deformat(String s){
-        String[] a = s.split(";");
+    public void deformat(String credential){
+        String[] a = credential.split(";");
         setSite(a[0]);
         setUsername(a[1]);
         setEmail(a[2]);
