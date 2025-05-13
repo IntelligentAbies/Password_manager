@@ -3,7 +3,7 @@ import UI.MainPanel;
 import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Password Manager");
+        JFrame frame = new JFrame("Password Manager by Diego Ferventi");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new MainPanel());
         frame.pack();
