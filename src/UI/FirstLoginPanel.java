@@ -2,8 +2,11 @@ package UI;
 
 import Controller.Controller;
 import Exceptions.PasswordIsWrong;
+import Utils.IsSecureUtil;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,7 @@ public class FirstLoginPanel extends JPanel {
     protected JPasswordField txtPassword;
     protected JPasswordField txtPasswordConfirm;
     protected FirstLoginListener firstLoginListener;
+    protected JLabel lblSecurityLevel;
 
     public FirstLoginPanel() {
         //Layout in colonna
@@ -33,6 +37,7 @@ public class FirstLoginPanel extends JPanel {
         txtPassword = new JPasswordField();
         txtPassword.setMaximumSize(new Dimension(300, 30)); // fissa larghezza massima
         txtPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtPassword.getDocument().addDocumentListener(new PasswordFieldListener());
         add(txtPassword);
 
         //Spazio fisso tra field e bottone
@@ -43,6 +48,14 @@ public class FirstLoginPanel extends JPanel {
         txtPasswordConfirm.setMaximumSize(new Dimension(300, 30)); // fissa larghezza massima
         txtPasswordConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(txtPasswordConfirm);
+
+        //Spazio fisso tra field e bottone
+        add(Box.createRigidArea(new Dimension(0, 10)));
+
+        lblSecurityLevel=new JLabel("La Password è: ");
+        lblSecurityLevel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblSecurityLevel.setMaximumSize(new Dimension(lblSecurityLevel.getPreferredSize().width, lblSecurityLevel.getPreferredSize().height));
+        add(lblSecurityLevel);
 
         //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
@@ -66,7 +79,13 @@ public class FirstLoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             String password = txtPassword.getText();
             String passwordConfirm = txtPasswordConfirm.getText();
-            if(password.equals(passwordConfirm)) {
+            if (!password.equals(passwordConfirm)) {
+                JOptionPane.showMessageDialog(null,"Le Due Password Non Combaciano : (");
+            }
+            else if (password.equals("")) {
+                JOptionPane.showMessageDialog(null,"Il campo della password non deve essere vuoto : (");
+            }
+            else{
                 Controller controller = new Controller();
                 try {
                     controller.setPassword(password);
@@ -80,9 +99,41 @@ public class FirstLoginPanel extends JPanel {
                     JOptionPane.showMessageDialog(null,"C'è stato un errore imprevisto : (");
                 }
             }
-            else {
-                JOptionPane.showMessageDialog(null,"Le Due Password Non Combaciano : (");
+        }
+    }
+
+    private class PasswordFieldListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            update();
+        }
+
+        public void changedUpdate(DocumentEvent e) {
+            update();
+        }
+
+        public void update(){
+            int securityLevel= IsSecureUtil.securityLevel(txtPassword.getText());
+            switch(securityLevel){
+                case 0:
+                    lblSecurityLevel.setText("La Password è: Debole");
+                    break;
+                case 1:
+                    lblSecurityLevel.setText("La Password è: Media");
+                    break;
+                case 2:
+                    lblSecurityLevel.setText("La Password è: Buona");
+                    break;
+                case 3:
+                    lblSecurityLevel.setText("La Password è: Forte");
+                    break;
             }
+            lblSecurityLevel.setMaximumSize(new Dimension(lblSecurityLevel.getPreferredSize().width, lblSecurityLevel.getPreferredSize().height));
         }
     }
 }
