@@ -6,12 +6,12 @@ import java.awt.*;
 
 
 public class MainPanel extends JPanel {
-    CardLayout cardLayout;
-    FirstLoginPanel firstLoginPanel;
-    NormalLoginPanel normalLoginPanel;
-    AddCredentialPanel addCredentialPanel;
-    TableCredentialPanel tableCredentialPanel;
-    RemoveCredentialPanel removeCredentialPanel;
+    private CardLayout cardLayout;
+    private FirstLoginPanel firstLoginPanel;
+    private NormalLoginPanel normalLoginPanel;
+    private AddCredentialPanel addCredentialPanel;
+    private TableCredentialPanel tableCredentialPanel;
+    private RemoveCredentialPanel removeCredentialPanel;
     public MainPanel() {
         Controller controller = new Controller();
         cardLayout = new CardLayout();
