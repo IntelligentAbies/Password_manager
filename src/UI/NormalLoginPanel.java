@@ -10,12 +10,18 @@ import java.awt.event.ActionListener;
 
 public class NormalLoginPanel extends FirstLoginPanel{
     private TableCredentialPanel tableCredentialPanel;
+    private LoginListener loginListener;
 
     public NormalLoginPanel() {
         super();
+        label.setText("Inserisci la password per accedere!");
+        label.setMaximumSize(new Dimension(label.getPreferredSize().width, label.getPreferredSize().height));
+
         txtPasswordConfirm.setVisible(false);
+
         btnLogin.removeActionListener(firstLoginListener);
-        btnLogin.addActionListener(new LoginListener());
+        loginListener = new LoginListener();
+        btnLogin.addActionListener(loginListener);
     }
 
     public void setTableCredentialPanel(TableCredentialPanel tableCredentialPanel) {
