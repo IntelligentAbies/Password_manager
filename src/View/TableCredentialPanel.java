@@ -1,16 +1,8 @@
 package View;
 
-import Controller.Controller;
-import Exceptions.DatabaseNotSetupped;
-import Exceptions.PasswordIsWrong;
-import Model.Credential;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 public class TableCredentialPanel extends JPanel {
     private DefaultTableModel tableModel;

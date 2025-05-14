@@ -1,15 +1,11 @@
 package View;
 
-import Controller.Controller;
-import Exceptions.PasswordIsWrong;
-import Utils.IsSecureUtil;
+
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class FirstLoginPanel extends JPanel {
     protected JLabel label;

@@ -1,14 +1,7 @@
 package View;
 
-import Controller.Controller;
-import Exceptions.CredentialNotValid;
-import Exceptions.PasswordIsWrong;
-import Model.Credential;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AddCredentialPanel extends JPanel {
     protected TableCredentialPanel tableCredentialPanel;

@@ -1,12 +1,8 @@
 package View;
 
-import Controller.Controller;
-import Exceptions.PasswordIsWrong;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class NormalLoginPanel extends FirstLoginPanel{
     public NormalLoginPanel() {
