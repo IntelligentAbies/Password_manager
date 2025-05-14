@@ -1,4 +1,4 @@
-package UI;
+package View;
 
 import Controller.Controller;
 import Exceptions.PasswordIsWrong;

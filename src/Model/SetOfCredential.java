@@ -4,7 +4,6 @@ import Exceptions.CredentialDoesntExist;
 import Exceptions.DatabaseNotSetupped;
 import Exceptions.PasswordIsWrong;
 import Utils.AesEncryptionUtil;
-import Database.Database;
 import Utils.IsAValidCredentialUtils;
 
 import java.util.ArrayList;

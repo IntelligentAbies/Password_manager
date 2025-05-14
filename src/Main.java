@@ -1,4 +1,4 @@
-import UI.MainPanel;
+import View.MainPanel;
 
 import javax.swing.*;
 public class Main {
