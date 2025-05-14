@@ -6,7 +6,7 @@ public class IsSecureUtil {
         if(password.matches("^(?=.{8,}$)(?=.*\\d)(?=.*[^A-Za-z0-9]).+$")){
             return 3;
         }
-        if(password.matches("^(?=.{8,}$)(?=.*[^A-Za-z0-9]).+$")||password.matches("^(?=.{8,}$)(?=.*\\d).+$")){
+        if((password.matches("^(?=.{8,}$)(?=.*[^A-Za-z0-9]).+$")||password.matches("^(?=.{8,}$)(?=.*\\d).+$"))&&password.matches("^(?=.*[A-Za-z]).+$")){
             return 2;
         }
         if(password.matches("^(?=.{8,}$).+$")){

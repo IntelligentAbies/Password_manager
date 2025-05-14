@@ -91,16 +91,20 @@ public class Controller implements ActionListener, DocumentListener {
         JLabel lblSecurityLevel = mainPanel.getFirstLoginPanel().getLblSecurityLevel();
         switch(securityLevel){
             case 0:
-                lblSecurityLevel.setText("La Password è: Debole");
+                lblSecurityLevel.setText("Debole");
+                lblSecurityLevel.setForeground(Color.red);
                 break;
             case 1:
-                lblSecurityLevel.setText("La Password è: Media");
+                lblSecurityLevel.setText("Media");
+                lblSecurityLevel.setForeground(new Color(218, 165, 32));
                 break;
             case 2:
-                lblSecurityLevel.setText("La Password è: Buona");
+                lblSecurityLevel.setText("Buona");
+                lblSecurityLevel.setForeground(new Color(0, 100, 0));
                 break;
             case 3:
-                lblSecurityLevel.setText("La Password è: Forte");
+                lblSecurityLevel.setText("Forte");
+                lblSecurityLevel.setForeground(new Color(50, 200, 50));
                 break;
         }
         lblSecurityLevel.setMaximumSize(new Dimension(lblSecurityLevel.getPreferredSize().width, lblSecurityLevel.getPreferredSize().height));

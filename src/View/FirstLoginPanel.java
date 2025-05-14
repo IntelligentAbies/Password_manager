@@ -17,6 +17,7 @@ public class FirstLoginPanel extends JPanel {
     protected JPasswordField txtPassword;
     protected JPasswordField txtPasswordConfirm;
     protected JLabel lblSecurityLevel;
+    protected JPanel labelPanel;
 
     public FirstLoginPanel() {
         //Layout in colonna
@@ -50,10 +51,23 @@ public class FirstLoginPanel extends JPanel {
         //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-        lblSecurityLevel=new JLabel("La Password è: ");
+        labelPanel = new JPanel();
+        labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.X_AXIS));
+        labelPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel lblSecurityIndicator = new JLabel("La Password è: ");
+        lblSecurityIndicator.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblSecurityIndicator.setMaximumSize(new Dimension(lblSecurityIndicator.getPreferredSize().width, lblSecurityIndicator.getPreferredSize().height));
+
+        lblSecurityLevel=new JLabel("Debole");
+        lblSecurityLevel.setForeground(Color.RED);
         lblSecurityLevel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lblSecurityLevel.setMaximumSize(new Dimension(lblSecurityLevel.getPreferredSize().width, lblSecurityLevel.getPreferredSize().height));
-        add(lblSecurityLevel);
+
+
+        labelPanel.add(lblSecurityIndicator);
+        labelPanel.add(lblSecurityLevel);
+        add(labelPanel);
+        //add(lblSecurityLevel);
 
         //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
