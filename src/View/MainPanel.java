@@ -13,29 +13,57 @@ public class MainPanel extends JPanel {
     private TableCredentialPanel tableCredentialPanel;
     private RemoveCredentialPanel removeCredentialPanel;
     public MainPanel() {
-        Controller controller = new Controller();
         cardLayout = new CardLayout();
         setLayout(cardLayout);
-        firstLoginPanel = new FirstLoginPanel();
-        normalLoginPanel = new NormalLoginPanel();
-        addCredentialPanel = new AddCredentialPanel();
-        tableCredentialPanel = new TableCredentialPanel();
-        removeCredentialPanel = new RemoveCredentialPanel();
-        addCredentialPanel.setTableCredentialPanel(tableCredentialPanel);
-        removeCredentialPanel.setTableCredentialPanel(tableCredentialPanel);
-        normalLoginPanel.setTableCredentialPanel(tableCredentialPanel);
 
+    }
 
-        if(controller.neverStarted()){
-            add(firstLoginPanel,"FirstLoginPanel");
-            add(normalLoginPanel,"NormalLoginPanel");
-        }
-        else{
-            add(normalLoginPanel,"NormalLoginPanel");
-            add(firstLoginPanel,"FirstLoginPanel");
-        }
-        add(removeCredentialPanel,"RemoveCredentialPanel");
-        add(addCredentialPanel,"AddCredentialPanel");
-        add(tableCredentialPanel,"TableCredentialPanel");
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public FirstLoginPanel getFirstLoginPanel() {
+        return firstLoginPanel;
+    }
+
+    public NormalLoginPanel getNormalLoginPanel() {
+        return normalLoginPanel;
+    }
+
+    public AddCredentialPanel getAddCredentialPanel() {
+        return addCredentialPanel;
+    }
+
+    public TableCredentialPanel getTableCredentialPanel() {
+        return tableCredentialPanel;
+    }
+
+    public RemoveCredentialPanel getRemoveCredentialPanel() {
+        return removeCredentialPanel;
+    }
+
+    public void setFirstLoginPanel(FirstLoginPanel firstLoginPanel) {
+        this.firstLoginPanel = firstLoginPanel;
+        add(firstLoginPanel, "FirstLoginPanel");
+    }
+
+    public void setNormalLoginPanel(NormalLoginPanel normalLoginPanel) {
+        this.normalLoginPanel = normalLoginPanel;
+        add(normalLoginPanel, "NormalLoginPanel");
+    }
+
+    public void setAddCredentialPanel(AddCredentialPanel addCredentialPanel) {
+        this.addCredentialPanel = addCredentialPanel;
+        add(addCredentialPanel, "AddCredentialPanel");
+    }
+
+    public void setTableCredentialPanel(TableCredentialPanel tableCredentialPanel) {
+        this.tableCredentialPanel = tableCredentialPanel;
+        add(tableCredentialPanel, "TableCredentialPanel");
+    }
+
+    public void setRemoveCredentialPanel(RemoveCredentialPanel removeCredentialPanel) {
+        this.removeCredentialPanel = removeCredentialPanel;
+        add(removeCredentialPanel, "RemoveCredentialPanel");
     }
 }

@@ -26,7 +26,6 @@ public class AddCredentialPanel extends JPanel {
     protected JButton btnSave;
     protected JButton btnShowAll;
     protected JPanel buttonPanel;
-    protected CreateButtonListener createButtonListener;
 
     public AddCredentialPanel() {
         // Configura il layout del pannello
@@ -53,11 +52,8 @@ public class AddCredentialPanel extends JPanel {
         txtPassword = new JTextField(20);
 
         // Pulsanti
-        createButtonListener = new CreateButtonListener();
         btnSave= new JButton("Salva");
-        btnSave.addActionListener(createButtonListener);
         btnShowAll = new JButton("Visualizza Tutti");
-        btnShowAll.addActionListener(new ShowAllButtonListener());
 
 
         // Posizionamento componenti
@@ -119,40 +115,65 @@ public class AddCredentialPanel extends JPanel {
         txtPassword.setText("");
     }
 
-    //serve per fare il refresh della tabella
-    public void setTableCredentialPanel(TableCredentialPanel tableCredentialPanel) {
-        this.tableCredentialPanel = tableCredentialPanel;
+
+
+    public JPanel getButtonPanel() {
+        return buttonPanel;
     }
 
-    public class ShowAllButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            //Prendo la reference del mainPanel e quella del suo layout
-            JPanel parent = (JPanel) AddCredentialPanel.this.getParent();
-            CardLayout cl = (CardLayout) parent.getLayout();
-            cl.show(parent, "TableCredentialPanel");
-        }
+    public JButton getBtnShowAll() {
+        return btnShowAll;
     }
 
-    public class CreateButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("test");
-            Controller controller=new Controller();
-            Credential credential=new Credential();
-            credential.setSite(txtSite.getText());
-            credential.setUsername(txtUsername.getText());
-            credential.setEmail(txtEmail.getText());
-            credential.setPhoneNumber(txtPhoneNumber.getText());
-            credential.setPassword(txtPassword.getText());
-            try {
-                controller.addCredential(credential);
-                JOptionPane.showMessageDialog(null,"Credenziali Aggiunte con successo : )");
-                clear();
-                tableCredentialPanel.refreshTable();
-            } catch (PasswordIsWrong ex) {
-                JOptionPane.showMessageDialog(null,"La password è sbagliata : (");
-            }catch (CredentialNotValid ex){
-                JOptionPane.showMessageDialog(null,ex.getMessage());
-            }
-        }
+    public JButton getBtnSave() {
+        return btnSave;
+    }
+
+    public JTextField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public JTextField getTxtPhoneNumber() {
+        return txtPhoneNumber;
+    }
+
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
+
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public JTextField getTxtSite() {
+        return txtSite;
+    }
+
+    public JLabel getLblPassword() {
+        return lblPassword;
+    }
+
+    public JLabel getLblPhoneNumber() {
+        return lblPhoneNumber;
+    }
+
+    public JLabel getLblEmail() {
+        return lblEmail;
+    }
+
+    public JLabel getLblUsername() {
+        return lblUsername;
+    }
+
+    public JLabel getLblSite() {
+        return lblSite;
+    }
+
+    public JLabel getLblMessage() {
+        return lblMessage;
+    }
+
+    public TableCredentialPanel getTableCredentialPanel() {
+        return tableCredentialPanel;
     }
 }

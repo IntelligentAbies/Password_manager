@@ -16,7 +16,6 @@ public class FirstLoginPanel extends JPanel {
     protected JButton btnLogin;
     protected JPasswordField txtPassword;
     protected JPasswordField txtPasswordConfirm;
-    protected FirstLoginListener firstLoginListener;
     protected JLabel lblSecurityLevel;
 
     public FirstLoginPanel() {
@@ -37,7 +36,6 @@ public class FirstLoginPanel extends JPanel {
         txtPassword = new JPasswordField();
         txtPassword.setMaximumSize(new Dimension(300, 30)); // fissa larghezza massima
         txtPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
-        txtPassword.getDocument().addDocumentListener(new PasswordFieldListener());
         add(txtPassword);
 
         //Spazio fisso tra field e bottone
@@ -60,10 +58,8 @@ public class FirstLoginPanel extends JPanel {
         //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-        firstLoginListener = new FirstLoginListener();
         btnLogin = new JButton("Login");
         btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnLogin.addActionListener(firstLoginListener);
         add(btnLogin);
 
         // Glue sotto per spingere il gruppo verso il centro
@@ -75,65 +71,23 @@ public class FirstLoginPanel extends JPanel {
         setPreferredSize (new Dimension(850, 400));
     }
 
-    private class FirstLoginListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String password = txtPassword.getText();
-            String passwordConfirm = txtPasswordConfirm.getText();
-            if (!password.equals(passwordConfirm)) {
-                JOptionPane.showMessageDialog(null,"Le Due Password Non Combaciano : (");
-            }
-            else if (password.equals("")) {
-                JOptionPane.showMessageDialog(null,"Il campo della password non deve essere vuoto : (");
-            }
-            else{
-                Controller controller = new Controller();
-                try {
-                    controller.setPassword(password);
-                    JOptionPane.showMessageDialog(null,"Password Creata Con Successo : )");
-
-                    //Prendo la reference del mainPanel e quella del suo layout
-                    JPanel parent = (JPanel) FirstLoginPanel.this.getParent();
-                    CardLayout cl = (CardLayout) parent.getLayout();
-                    cl.show(parent, "TableCredentialPanel");
-                } catch (PasswordIsWrong ex) {
-                    JOptionPane.showMessageDialog(null,"C'è stato un errore imprevisto : (");
-                }
-            }
-        }
+    public JLabel getLabel() {
+        return label;
     }
 
-    private class PasswordFieldListener implements DocumentListener {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            update();
-        }
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
 
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            update();
-        }
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
 
-        public void changedUpdate(DocumentEvent e) {
-            update();
-        }
+    public JPasswordField getTxtPasswordConfirm() {
+        return txtPasswordConfirm;
+    }
 
-        public void update(){
-            int securityLevel= IsSecureUtil.securityLevel(txtPassword.getText());
-            switch(securityLevel){
-                case 0:
-                    lblSecurityLevel.setText("La Password è: Debole");
-                    break;
-                case 1:
-                    lblSecurityLevel.setText("La Password è: Media");
-                    break;
-                case 2:
-                    lblSecurityLevel.setText("La Password è: Buona");
-                    break;
-                case 3:
-                    lblSecurityLevel.setText("La Password è: Forte");
-                    break;
-            }
-            lblSecurityLevel.setMaximumSize(new Dimension(lblSecurityLevel.getPreferredSize().width, lblSecurityLevel.getPreferredSize().height));
-        }
+    public JLabel getLblSecurityLevel() {
+        return lblSecurityLevel;
     }
 }

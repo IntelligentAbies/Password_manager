@@ -25,13 +25,10 @@ public class TableCredentialPanel extends JPanel {
 
 
         btnCreate = new JButton("Aggiungi Delle Credenziali");
-        btnCreate.addActionListener(new CreateListener());
 
         btnRemove = new JButton("Rimuovi Delle Credenziali");
-        btnRemove.addActionListener(new RemoveButtonListener());
 
         btnFilter = new JButton("Filtra");
-        btnFilter.addActionListener(new FilterListener());
 
         txtFilter = new JTextField(20);
 
@@ -79,58 +76,34 @@ public class TableCredentialPanel extends JPanel {
         //Aggiungi bordi e titolo
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Password Manager"));
 
-        refreshTable();
         setPreferredSize (new Dimension(850, 400));
     }
 
-    public void refreshTable() {
-        Controller controller = new Controller();
-        tableModel.setRowCount(0);
-        try {
-            List<Credential> credentials=controller.getData();
-            for (Credential credential : credentials) {
-                tableModel.addRow(new Object[]{credential.getSite(), credential.getUsername(), credential.getEmail(),credential.getPhoneNumber(), credential.getPassword()});
-            }
-        } catch (PasswordIsWrong | DatabaseNotSetupped e) {
-            //Qua ci entra sempre all'inizio
-            //JOptionPane.showMessageDialog(null,"La password è sbagliata : (");
-        }
+    public DefaultTableModel getTableModel() {
+        return tableModel;
     }
 
-    public void refreshTable(List<Credential> credentials) {
-        tableModel.setRowCount(0);
-        for (Credential credential : credentials) {
-            tableModel.addRow(new Object[]{credential.getSite(), credential.getUsername(), credential.getEmail(),credential.getPhoneNumber(), credential.getPassword()});
-        }
+    public JLabel getLblFilter() {
+        return lblFilter;
     }
 
-    public class FilterListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            String filter = txtFilter.getText();
-            String type = cbType.getSelectedItem().toString();
-            Controller controller = new Controller();
-            try {
-                List<Credential> credentials = controller.findType(type,filter);
-                refreshTable(credentials);
-            } catch (PasswordIsWrong ex) {
-                JOptionPane.showMessageDialog(null,"La password è sbagliata : (");
-            }
-        }
+    public JButton getBtnCreate() {
+        return btnCreate;
     }
 
-    public class CreateListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            JPanel parent = (JPanel) TableCredentialPanel.this.getParent();
-            CardLayout cl = (CardLayout) parent.getLayout();
-            cl.show(parent, "AddCredentialPanel");
-        }
+    public JButton getBtnFilter() {
+        return btnFilter;
     }
 
-    public class RemoveButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            JPanel parent = (JPanel) TableCredentialPanel.this.getParent();
-            CardLayout cl = (CardLayout) parent.getLayout();
-            cl.show(parent, "RemoveCredentialPanel");
-        }
+    public JButton getBtnRemove() {
+        return btnRemove;
+    }
+
+    public JTextField getTxtFilter() {
+        return txtFilter;
+    }
+
+    public JComboBox<String> getCbType() {
+        return cbType;
     }
 }

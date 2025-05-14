@@ -19,41 +19,10 @@ public class RemoveCredentialPanel extends AddCredentialPanel{
         this.txtPassword.setEditable(false);
         this.btnSave.setText("Rimuovi");
         btnShow = new JButton("Cerca");
-        btnShow.addActionListener(new FindButtonListener());
         buttonPanel.add(btnShow);
-        this.btnSave.removeActionListener(createButtonListener);
-        this.btnSave.addActionListener(new RemoveButtonListener());
     }
 
-    private class RemoveButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            Controller controller = new Controller();
-            try {
-                controller.removeCredential(txtSite.getText(),txtUsername.getText());
-                JOptionPane.showMessageDialog(null,"Credenziali Rimosse con successo!");
-                clear();
-                tableCredentialPanel.refreshTable();
-            } catch (PasswordIsWrong ex) {
-                JOptionPane.showMessageDialog(null,"La password è sbagliata : (");
-            } catch (CredentialDoesntExist ex) {
-                JOptionPane.showMessageDialog(null,ex.getMessage());
-            }
-
-        }
+    public JButton getBtnShow() {
+        return btnShow;
     }
-
-    private class FindButtonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e) {
-            Controller controller = new Controller();
-            try {
-                Credential credential = controller.find(txtSite.getText(),txtUsername.getText());
-                txtEmail.setText(credential.getEmail());
-                txtPhoneNumber.setText(credential.getPhoneNumber());
-                txtPassword.setText(credential.getPassword());
-            } catch (CredentialDoesntExist ex) {
-                JOptionPane.showMessageDialog(null,"Le credenziali inserite non esistono : (");
-            }
-        }
-    }
-
 }
