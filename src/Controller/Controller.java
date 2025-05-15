@@ -50,6 +50,7 @@ public class Controller implements ActionListener, DocumentListener {
         mainPanel.getTableCredentialPanel().getBtnCreate().addActionListener(this);
         mainPanel.getTableCredentialPanel().getBtnRemove().addActionListener(this);
         mainPanel.getTableCredentialPanel().getBtnFilter().addActionListener(this);
+        mainPanel.getTableCredentialPanel().getTxtFilter().addActionListener(this);
 
         //Listener per la schermata di aggiunta credenziale
         mainPanel.getAddCredentialPanel().getBtnSave().addActionListener(this);
@@ -126,6 +127,7 @@ public class Controller implements ActionListener, DocumentListener {
             try{
                 credentials.setPassword(password);
                 JOptionPane.showMessageDialog(null,"Password Creata Con Successo : )");
+                credentials.add("");
                 mainPanel.getCardLayout().show(mainPanel,"TableCredentialPanel");
             }catch (PasswordIsWrong passwordWrong){
                 JOptionPane.showMessageDialog(null,"C'è stato un errore imprevisto : (");
@@ -237,7 +239,7 @@ public class Controller implements ActionListener, DocumentListener {
         else if(e.getSource()==mainPanel.getNormalLoginPanel().getBtnLogin()){
             login();
         }
-        else if(e.getSource()==mainPanel.getTableCredentialPanel().getBtnFilter()){
+        else if(e.getSource()==mainPanel.getTableCredentialPanel().getBtnFilter()||e.getSource()==mainPanel.getTableCredentialPanel().getTxtFilter()){
             filter();
         }
         else if(e.getSource()==mainPanel.getTableCredentialPanel().getBtnCreate()){

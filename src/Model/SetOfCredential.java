@@ -36,20 +36,16 @@ public class SetOfCredential {
         }
     }
 
-    public List<Credential> getCredentials() throws PasswordIsWrong {
+    public void add(String s) throws PasswordIsWrong {
+        String ciphertext = AesEncryptionUtil.encrypt(s,password);
+        Database.update(ciphertext);
         if(!isSetupped){
-            throw new DatabaseNotSetupped("The database has not been setupped yet");
+            isSetupped = true;
         }
-        String ciphertext = Database.read();
-        String cleartext = AesEncryptionUtil.decrypt(ciphertext,password);
-        String[] tmp = cleartext.split("\n");
-        credentials=new ArrayList<>();
-        for(String formatted_credential : tmp) {
-            Credential c = new Credential();
-            c.deformat(formatted_credential);
-            credentials.add(c);
-        }
-        return credentials;
+    }
+
+    public List<Credential> getCredentials() throws PasswordIsWrong {
+        return getCredentials(password);
     }
 
     public List<Credential> getCredentials(String password) throws PasswordIsWrong {
@@ -60,10 +56,12 @@ public class SetOfCredential {
         String cleartext = AesEncryptionUtil.decrypt(ciphertext,password);
         String[] tmp = cleartext.split("\n");
         credentials=new ArrayList<>();
-        for(String formatted_credential : tmp) {
-            Credential c = new Credential();
-            c.deformat(formatted_credential);
-            credentials.add(c);
+        if(!tmp[0].isEmpty()) {
+            for (String formatted_credential : tmp) {
+                Credential c = new Credential();
+                c.deformat(formatted_credential);
+                credentials.add(c);
+            }
         }
         return credentials;
     }
