@@ -2,9 +2,12 @@ package View;
 
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class FirstLoginPanel extends JPanel {
@@ -23,8 +26,16 @@ public class FirstLoginPanel extends JPanel {
 
     public FirstLoginPanel() {
         //mi carico le icone
-        showPasswordIcon = new ImageIcon("images/discover.png");
-        hidePasswordIcon = new ImageIcon("images/uncover.png");
+        try {
+            //Sta roba serve solo per fare in modo che le immagini poi vengono caricate nel binario
+            InputStream is = getClass().getResourceAsStream("/discover.png");
+            showPasswordIcon = new ImageIcon(ImageIO.read(is));
+            is = getClass().getResourceAsStream("/uncover.png");
+            hidePasswordIcon = new ImageIcon(ImageIO.read(is));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         Image scaledShowImage = showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         Image scaledHideImage = hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 
