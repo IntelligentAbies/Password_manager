@@ -6,6 +6,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,9 +21,9 @@ public class FirstLoginPanel extends JPanel {
     protected JLabel lblSecurityLevel;
     protected JPanel labelPasswordPanel;
     protected JPanel passwordInsertionPanel;
-    protected JPanel passwordConfirmPanel;
     protected ImageIcon showPasswordIcon;
     protected ImageIcon hidePasswordIcon;
+    protected FocusListener focusListener = new FocusListener();
 
 
     public FirstLoginPanel() {
@@ -35,7 +37,6 @@ public class FirstLoginPanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         Image scaledShowImage = showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         Image scaledHideImage = hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 
@@ -48,6 +49,7 @@ public class FirstLoginPanel extends JPanel {
         //Glue sopra per spingere il gruppo verso il centro
         add(Box.createVerticalGlue());
 
+        //Prima label
         label=new JLabel("Crea La Tua Password Per Iniziare!");
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setMaximumSize(new Dimension(label.getPreferredSize().width, label.getPreferredSize().height));
@@ -55,20 +57,23 @@ public class FirstLoginPanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-
+        //panel contenete primo campo password + bottone di visualizzazione della password
         passwordInsertionPanel=new JPanel();
         passwordInsertionPanel.setLayout(new BoxLayout(passwordInsertionPanel, BoxLayout.X_AXIS));
         passwordInsertionPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         passwordInsertionPanel.add(Box.createRigidArea(new Dimension(22, 0)));
 
+        //primo campo password
         txtPassword = new JPasswordField();
         txtPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
         txtPassword.setPreferredSize(new Dimension(300, 20));
         txtPassword.setMaximumSize(new Dimension(300, 20));
         txtPassword.setMinimumSize(new Dimension(300, 20));
+        txtPassword.addActionListener(focusListener);
         passwordInsertionPanel.add(txtPassword);
 
+        //bottone di visualizzazione della password
         btnShowPassword = new JToggleButton(showPasswordIcon);
         btnShowPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnShowPassword.setBorderPainted(false); // Rimuove il bordo
@@ -79,25 +84,19 @@ public class FirstLoginPanel extends JPanel {
 
         add(passwordInsertionPanel);
 
-        //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
 
-        passwordConfirmPanel=new JPanel();
-        passwordConfirmPanel.setLayout(new BoxLayout(passwordConfirmPanel, BoxLayout.X_AXIS));
-        passwordConfirmPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+        //secondo campo password
         txtPasswordConfirm = new JPasswordField();
         txtPasswordConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
         txtPasswordConfirm.setPreferredSize(new Dimension(300, 20));
         txtPasswordConfirm.setMaximumSize(new Dimension(300, 20));
         txtPasswordConfirm.setMinimumSize(new Dimension(300, 20));
+        add(txtPasswordConfirm);
 
-        passwordConfirmPanel.add(txtPasswordConfirm);
-        add(passwordConfirmPanel);
-
-        //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
 
+        //panel per il livello di sicurezza della password
         labelPasswordPanel = new JPanel();
         labelPasswordPanel.setLayout(new BoxLayout(labelPasswordPanel, BoxLayout.X_AXIS));
         labelPasswordPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -114,7 +113,7 @@ public class FirstLoginPanel extends JPanel {
         labelPasswordPanel.add(lblSecurityIndicator);
         labelPasswordPanel.add(lblSecurityLevel);
         add(labelPasswordPanel);
-        //add(lblSecurityLevel);
+
 
         //Spazio fisso tra field e bottone
         add(Box.createRigidArea(new Dimension(0, 10)));
@@ -140,16 +139,8 @@ public class FirstLoginPanel extends JPanel {
         return showPasswordIcon;
     }
 
-    public void setShowPasswordIcon(ImageIcon showPasswordIcon) {
-        this.showPasswordIcon = showPasswordIcon;
-    }
-
     public ImageIcon getHidePasswordIcon() {
         return hidePasswordIcon;
-    }
-
-    public void setHidePasswordIcon(ImageIcon hidePasswordIcon) {
-        this.hidePasswordIcon = hidePasswordIcon;
     }
 
     public JButton getBtnLogin() {
@@ -170,5 +161,14 @@ public class FirstLoginPanel extends JPanel {
 
     public JToggleButton getBtnShowPassword() {
         return btnShowPassword;
+    }
+
+    public class FocusListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==txtPassword){
+                txtPasswordConfirm.requestFocus();
+            }
+        }
     }
 }

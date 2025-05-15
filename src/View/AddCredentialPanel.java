@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddCredentialPanel extends JPanel {
     protected TableCredentialPanel tableCredentialPanel;
@@ -19,6 +21,7 @@ public class AddCredentialPanel extends JPanel {
     protected JButton btnSave;
     protected JButton btnShowAll;
     protected JPanel buttonPanel;
+    protected FocusListener focusListener=new FocusListener();
 
     public AddCredentialPanel() {
         // Configura il layout del pannello
@@ -39,9 +42,13 @@ public class AddCredentialPanel extends JPanel {
 
         // Campi di testo
         txtSite = new JTextField(20);
+        txtSite.addActionListener(focusListener);
         txtUsername = new JTextField(20);
+        txtUsername.addActionListener(focusListener);
         txtEmail = new JTextField(20);
+        txtEmail.addActionListener(focusListener);
         txtPhoneNumber = new JTextField(20);
+        txtPhoneNumber.addActionListener(focusListener);
         txtPassword = new JTextField(20);
 
         // Pulsanti
@@ -108,8 +115,6 @@ public class AddCredentialPanel extends JPanel {
         txtPassword.setText("");
     }
 
-
-
     public JPanel getButtonPanel() {
         return buttonPanel;
     }
@@ -168,5 +173,23 @@ public class AddCredentialPanel extends JPanel {
 
     public TableCredentialPanel getTableCredentialPanel() {
         return tableCredentialPanel;
+    }
+
+    public class FocusListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == txtSite){
+                txtUsername.requestFocus();
+            }
+            else if(e.getSource() == txtUsername){
+                txtEmail.requestFocus();
+            }
+            else if(e.getSource() == txtEmail){
+                txtPhoneNumber.requestFocus();
+            }
+            else if(e.getSource() == txtPhoneNumber){
+                txtPassword.requestFocus();
+            }
+        }
     }
 }

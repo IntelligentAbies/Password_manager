@@ -11,5 +11,6 @@ public class NormalLoginPanel extends FirstLoginPanel{
         label.setMaximumSize(new Dimension(label.getPreferredSize().width, label.getPreferredSize().height));
         txtPasswordConfirm.setVisible(false);
         labelPasswordPanel.setVisible(false);
+        txtPassword.removeActionListener(focusListener);
     }
 }

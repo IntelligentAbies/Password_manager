@@ -9,11 +9,14 @@ public class RemoveCredentialPanel extends AddCredentialPanel{
     private JButton btnShow;
     public RemoveCredentialPanel() {
         super();
-        this.lblMessage.setText("Inserisci Sito e Username delle credenziali da rimuovere!");
-        this.txtEmail.setEditable(false);
-        this.txtPhoneNumber.setEditable(false);
-        this.txtPassword.setEditable(false);
-        this.btnSave.setText("Rimuovi");
+        lblMessage.setText("Inserisci Sito e Username delle credenziali da rimuovere!");
+        txtUsername.removeActionListener(focusListener);
+        txtEmail.setEditable(false);
+        txtEmail.removeActionListener(focusListener);
+        txtPhoneNumber.setEditable(false);
+        txtPhoneNumber.removeActionListener(focusListener);
+        txtPassword.setEditable(false);
+        btnSave.setText("Rimuovi");
         btnShow = new JButton("Cerca");
         buttonPanel.add(btnShow);
     }

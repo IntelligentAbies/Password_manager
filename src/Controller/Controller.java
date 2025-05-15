@@ -41,10 +41,12 @@ public class Controller implements ActionListener, DocumentListener {
         mainPanel.getFirstLoginPanel().getBtnLogin().addActionListener(this);
         mainPanel.getFirstLoginPanel().getTxtPassword().getDocument().addDocumentListener(this);
         mainPanel.getFirstLoginPanel().getBtnShowPassword().addActionListener(this);
+        mainPanel.getFirstLoginPanel().getTxtPasswordConfirm().addActionListener(this);
 
         //Listener per la schermata di login
         mainPanel.getNormalLoginPanel().getBtnLogin().addActionListener(this);
         mainPanel.getNormalLoginPanel().getBtnShowPassword().addActionListener(this);
+        mainPanel.getNormalLoginPanel().getTxtPassword().addActionListener(this);
 
         //Listener per la schermata di visualizzazione
         mainPanel.getTableCredentialPanel().getBtnCreate().addActionListener(this);
@@ -55,12 +57,13 @@ public class Controller implements ActionListener, DocumentListener {
         //Listener per la schermata di aggiunta credenziale
         mainPanel.getAddCredentialPanel().getBtnSave().addActionListener(this);
         mainPanel.getAddCredentialPanel().getBtnShowAll().addActionListener(this);
+        mainPanel.getAddCredentialPanel().getTxtPassword().addActionListener(this);
 
         //Listener per la schermata di rimozione delle credenziali
         mainPanel.getRemoveCredentialPanel().getBtnSave().addActionListener(this);
         mainPanel.getRemoveCredentialPanel().getBtnShowAll().addActionListener(this);
         mainPanel.getRemoveCredentialPanel().getBtnShow().addActionListener(this);
-
+        mainPanel.getRemoveCredentialPanel().getTxtUsername().addActionListener(this);
 
     }
 
@@ -174,6 +177,7 @@ public class Controller implements ActionListener, DocumentListener {
             credentials.add(credential);
             JOptionPane.showMessageDialog(null,"Credenziali Aggiunte con successo : )");
             mainPanel.getAddCredentialPanel().clear();
+            mainPanel.getAddCredentialPanel().getTxtSite().requestFocus();
             refreshTable();
         } catch (PasswordIsWrong e) {
             JOptionPane.showMessageDialog(null,"Qualcosa è andato storto : (");
@@ -206,7 +210,6 @@ public class Controller implements ActionListener, DocumentListener {
         }
     }
 
-
     public void showPassword(JToggleButton btnShowPassword,JPasswordField txtPassword){
         String text = txtPassword.getText();
         if(btnShowPassword.getModel().isSelected()){
@@ -223,7 +226,7 @@ public class Controller implements ActionListener, DocumentListener {
     //Actionlistener
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==mainPanel.getFirstLoginPanel().getBtnLogin()){
+        if(e.getSource()==mainPanel.getFirstLoginPanel().getBtnLogin()||e.getSource()==mainPanel.getFirstLoginPanel().getTxtPasswordConfirm()){
             register();
         }
         else if(e.getSource()==mainPanel.getFirstLoginPanel().getBtnShowPassword()){
@@ -236,7 +239,7 @@ public class Controller implements ActionListener, DocumentListener {
             JPasswordField txtPassword = mainPanel.getNormalLoginPanel().getTxtPassword();
             showPassword(btnShowPassword,txtPassword);
         }
-        else if(e.getSource()==mainPanel.getNormalLoginPanel().getBtnLogin()){
+        else if(e.getSource()==mainPanel.getNormalLoginPanel().getBtnLogin()||e.getSource()==mainPanel.getNormalLoginPanel().getTxtPassword()){
             login();
         }
         else if(e.getSource()==mainPanel.getTableCredentialPanel().getBtnFilter()||e.getSource()==mainPanel.getTableCredentialPanel().getTxtFilter()){
@@ -248,13 +251,13 @@ public class Controller implements ActionListener, DocumentListener {
         else if(e.getSource()==mainPanel.getTableCredentialPanel().getBtnRemove()) {
             mainPanel.getCardLayout().show(mainPanel,"RemoveCredentialPanel");
         }
-        else if(e.getSource()==mainPanel.getAddCredentialPanel().getBtnSave()){
+        else if(e.getSource()==mainPanel.getAddCredentialPanel().getBtnSave()||e.getSource()==mainPanel.getAddCredentialPanel().getTxtPassword()){
             addCredential();
         }
         else if(e.getSource()==mainPanel.getAddCredentialPanel().getBtnShowAll()||e.getSource()==mainPanel.getRemoveCredentialPanel().getBtnShowAll()){
             mainPanel.getCardLayout().show(mainPanel,"TableCredentialPanel");
         }
-        else if(e.getSource()==mainPanel.getRemoveCredentialPanel().getBtnShow()){
+        else if(e.getSource()==mainPanel.getRemoveCredentialPanel().getBtnShow()||e.getSource()==mainPanel.getRemoveCredentialPanel().getTxtUsername()){
             findCredential();
         }
         else if(e.getSource()==mainPanel.getRemoveCredentialPanel().getBtnSave()){
