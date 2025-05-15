@@ -21,7 +21,7 @@ public class FirstLoginPanel extends JPanel {
     protected ImageIcon showPasswordIcon;
     protected ImageIcon hidePasswordIcon;
     protected FocusListener focusListener = new FocusListener();
-
+    protected JPanel passwordConfirmPanel;
 
     public FirstLoginPanel() {
         //mi carico le icone
@@ -61,12 +61,16 @@ public class FirstLoginPanel extends JPanel {
 
         passwordInsertionPanel.add(Box.createRigidArea(new Dimension(22, 0)));
 
+        //label password
+        JLabel lblPassword=new JLabel("Password: ");
+        passwordInsertionPanel.add(lblPassword);
+
         //primo campo password
         txtPassword = new JPasswordField();
         txtPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
-        txtPassword.setPreferredSize(new Dimension(300, 20));
-        txtPassword.setMaximumSize(new Dimension(300, 20));
-        txtPassword.setMinimumSize(new Dimension(300, 20));
+        txtPassword.setPreferredSize(new Dimension(200, 20));
+        txtPassword.setMaximumSize(new Dimension(200, 20));
+        txtPassword.setMinimumSize(new Dimension(200, 20));
         txtPassword.addActionListener(focusListener);
         passwordInsertionPanel.add(txtPassword);
 
@@ -83,13 +87,23 @@ public class FirstLoginPanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0, 10)));
 
+        //panel contenete la label conferma password + password field di conferma
+        passwordConfirmPanel=new JPanel();
+        passwordConfirmPanel.setLayout(new BoxLayout(passwordConfirmPanel, BoxLayout.X_AXIS));
+        passwordConfirmPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        //label password
+        JLabel lblPasswordConfirm=new JLabel("Conferma: ");
+        passwordConfirmPanel.add(lblPasswordConfirm);
+
         //secondo campo password
         txtPasswordConfirm = new JPasswordField();
         txtPasswordConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
-        txtPasswordConfirm.setPreferredSize(new Dimension(300, 20));
-        txtPasswordConfirm.setMaximumSize(new Dimension(300, 20));
-        txtPasswordConfirm.setMinimumSize(new Dimension(300, 20));
-        add(txtPasswordConfirm);
+        txtPasswordConfirm.setPreferredSize(new Dimension(200, 20));
+        txtPasswordConfirm.setMaximumSize(new Dimension(200, 20));
+        txtPasswordConfirm.setMinimumSize(new Dimension(200, 20));
+        passwordConfirmPanel.add(txtPasswordConfirm);
+        add(passwordConfirmPanel);
 
         add(Box.createRigidArea(new Dimension(0, 10)));
 
