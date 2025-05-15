@@ -117,7 +117,7 @@ public class Controller implements ActionListener, DocumentListener {
 
     }
 
-    private void register(){
+    public void register(){
         String password = mainPanel.getFirstLoginPanel().getTxtPassword().getText();
         String passwordConfirm = mainPanel.getFirstLoginPanel().getTxtPasswordConfirm().getText();
         if (!password.equals(passwordConfirm)) {
@@ -139,7 +139,7 @@ public class Controller implements ActionListener, DocumentListener {
 
     }
 
-    private void login(){
+    public void login(){
         String password = new String(mainPanel.getNormalLoginPanel().getTxtPassword().getText());
         try{
             credentials.setPassword(password);

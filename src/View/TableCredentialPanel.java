@@ -75,10 +75,6 @@ public class TableCredentialPanel extends JPanel {
         return tableModel;
     }
 
-    public JLabel getLblFilter() {
-        return lblFilter;
-    }
-
     public JButton getBtnCreate() {
         return btnCreate;
     }

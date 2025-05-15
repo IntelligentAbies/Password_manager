@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddCredentialPanel extends JPanel {
-    protected TableCredentialPanel tableCredentialPanel;
     protected JLabel lblMessage;
     protected JLabel lblSite;
     protected JLabel lblUsername;
@@ -115,10 +114,6 @@ public class AddCredentialPanel extends JPanel {
         txtPassword.setText("");
     }
 
-    public JPanel getButtonPanel() {
-        return buttonPanel;
-    }
-
     public JButton getBtnShowAll() {
         return btnShowAll;
     }
@@ -145,34 +140,6 @@ public class AddCredentialPanel extends JPanel {
 
     public JTextField getTxtSite() {
         return txtSite;
-    }
-
-    public JLabel getLblPassword() {
-        return lblPassword;
-    }
-
-    public JLabel getLblPhoneNumber() {
-        return lblPhoneNumber;
-    }
-
-    public JLabel getLblEmail() {
-        return lblEmail;
-    }
-
-    public JLabel getLblUsername() {
-        return lblUsername;
-    }
-
-    public JLabel getLblSite() {
-        return lblSite;
-    }
-
-    public JLabel getLblMessage() {
-        return lblMessage;
-    }
-
-    public TableCredentialPanel getTableCredentialPanel() {
-        return tableCredentialPanel;
     }
 
     public class FocusListener implements ActionListener {

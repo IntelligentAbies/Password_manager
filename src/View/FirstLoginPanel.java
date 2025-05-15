@@ -1,7 +1,5 @@
 package View;
 
-
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
-
 
 public class FirstLoginPanel extends JPanel {
     protected JLabel label;
@@ -129,10 +126,6 @@ public class FirstLoginPanel extends JPanel {
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Password Manager"));
 
         setPreferredSize (new Dimension(850, 400));
-    }
-
-    public JLabel getLabel() {
-        return label;
     }
 
     public ImageIcon getShowPasswordIcon() {
