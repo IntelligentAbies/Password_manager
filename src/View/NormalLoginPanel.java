@@ -10,6 +10,6 @@ public class NormalLoginPanel extends FirstLoginPanel{
         label.setText("Inserisci la password per accedere!");
         label.setMaximumSize(new Dimension(label.getPreferredSize().width, label.getPreferredSize().height));
         txtPasswordConfirm.setVisible(false);
-        labelPanel.setVisible(false);
+        labelPasswordPanel.setVisible(false);
     }
 }
