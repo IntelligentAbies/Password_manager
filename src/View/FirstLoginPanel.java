@@ -23,8 +23,8 @@ public class FirstLoginPanel extends JPanel {
 
     public FirstLoginPanel() {
         //mi carico le icone
-        showPasswordIcon = new ImageIcon("src/images/discover.png");
-        hidePasswordIcon = new ImageIcon("src/images/uncover.png");
+        showPasswordIcon = new ImageIcon("images/discover.png");
+        hidePasswordIcon = new ImageIcon("images/uncover.png");
         Image scaledShowImage = showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
         Image scaledHideImage = hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 
