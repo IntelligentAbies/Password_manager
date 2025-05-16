@@ -29,6 +29,7 @@ public class AddCredentialPanel extends JPanel {
         // Margini di ogni griglia
         gbc.insets = new Insets(5, 5, 5, 5);
 
+        //gli elementi si "strechano" orizontalmente
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Etichette
