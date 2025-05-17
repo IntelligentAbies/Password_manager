@@ -2,11 +2,13 @@ package View;
 
 
 
+import View.CustomElements.CustomButton;
+
 import javax.swing.*;
 
 
 public class RemoveCredentialPanel extends AddCredentialPanel{
-    private JButton btnShow;
+    private CustomButton btnShow;
     public RemoveCredentialPanel() {
         super();
         lblMessage.setText("Inserisci Sito e Username delle credenziali da rimuovere!");
@@ -17,7 +19,7 @@ public class RemoveCredentialPanel extends AddCredentialPanel{
         txtPhoneNumber.removeActionListener(focusListener);
         txtPassword.setEditable(false);
         btnSave.setText("Rimuovi");
-        btnShow = new JButton("Cerca");
+        btnShow = new CustomButton("Cerca");
         buttonPanel.add(btnShow);
     }
 

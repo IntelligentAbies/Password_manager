@@ -1,6 +1,9 @@
 package View;
 
+import View.CustomElements.CustomButton;
+
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +20,8 @@ public class AddCredentialPanel extends JPanel {
     protected JTextField txtEmail;
     protected JTextField txtPhoneNumber;
     protected JTextField txtPassword;
-    protected JButton btnSave;
-    protected JButton btnShowAll;
+    protected CustomButton btnSave;
+    protected CustomButton btnShowAll;
     protected JPanel buttonPanel;
     protected FocusListener focusListener=new FocusListener();
 
@@ -34,26 +37,47 @@ public class AddCredentialPanel extends JPanel {
 
         // Etichette
         lblMessage = new JLabel("Inserisci Le tue credenziali per salvarle!");
+        lblMessage.setForeground(Color.WHITE);
         lblSite = new JLabel("Sito:");
+        lblSite.setForeground(Color.WHITE);
         lblUsername = new JLabel("Username:");
+        lblUsername.setForeground(Color.WHITE);
         lblEmail = new JLabel("Email:");
+        lblEmail.setForeground(Color.WHITE);
         lblPhoneNumber = new JLabel("PhoneNumber:");
+        lblPhoneNumber.setForeground(Color.WHITE);
         lblPassword = new JLabel("Password:");
+        lblPassword.setForeground(Color.WHITE);
 
         // Campi di testo
         txtSite = new JTextField(20);
+        txtSite.setCaretColor(Color.WHITE);
+        txtSite.setForeground(Color.WHITE);
+        txtSite.setBackground(new Color(35,35,35));
         txtSite.addActionListener(focusListener);
         txtUsername = new JTextField(20);
+        txtUsername.setCaretColor(Color.WHITE);
+        txtUsername.setForeground(Color.WHITE);
+        txtUsername.setBackground(new Color(35,35,35));
         txtUsername.addActionListener(focusListener);
         txtEmail = new JTextField(20);
+        txtEmail.setCaretColor(Color.WHITE);
+        txtEmail.setForeground(Color.WHITE);
+        txtEmail.setBackground(new Color(35,35,35));
         txtEmail.addActionListener(focusListener);
         txtPhoneNumber = new JTextField(20);
+        txtPhoneNumber.setCaretColor(Color.WHITE);
+        txtPhoneNumber.setForeground(Color.WHITE);
+        txtPhoneNumber.setBackground(new Color(35,35,35));
         txtPhoneNumber.addActionListener(focusListener);
         txtPassword = new JTextField(20);
+        txtPassword.setCaretColor(Color.WHITE);
+        txtPassword.setForeground(Color.WHITE);
+        txtPassword.setBackground(new Color(35,35,35));
 
         // Pulsanti
-        btnSave= new JButton("Salva");
-        btnShowAll = new JButton("Visualizza Tutti");
+        btnSave= new CustomButton("Salva");
+        btnShowAll = new CustomButton("Visualizza Tutti");
 
 
         // Posizionamento componenti
@@ -94,6 +118,7 @@ public class AddCredentialPanel extends JPanel {
 
         // Pannello per i pulsanti
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(new Color(35,35,35));
         buttonPanel.add(btnSave);
         buttonPanel.add(btnShowAll);
 
@@ -102,9 +127,17 @@ public class AddCredentialPanel extends JPanel {
         gbc.gridwidth = 2;
         add(buttonPanel, gbc);
 
-        // Aggiungi bordi e titolo
-        setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Password Manager"));
+        add(Box.createVerticalGlue());
+
+        TitledBorder border = BorderFactory.createTitledBorder(
+                BorderFactory.createEtchedBorder(),
+                "Password Manager"
+        );
+        border.setTitleColor(Color.WHITE);
+        setBorder(border);
+
         setPreferredSize (new Dimension(850, 400));
+        setBackground(new Color(35,35,35));
     }
 
     public void clear(){
