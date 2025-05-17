@@ -192,7 +192,7 @@ public class Controller implements ActionListener, DocumentListener {
             mainPanel.getRemoveCredentialPanel().getTxtEmail().setText(credential.getEmail());
             mainPanel.getRemoveCredentialPanel().getTxtPhoneNumber().setText(credential.getPhoneNumber());
             mainPanel.getRemoveCredentialPanel().getTxtPassword().setText(credential.getPassword());
-        }catch (CredentialNotValid ex){
+        }catch (CredentialDoesntExist ex){
             JOptionPane.showMessageDialog(null,"Le credenziali inserite non esistono : (");
         }
     }
