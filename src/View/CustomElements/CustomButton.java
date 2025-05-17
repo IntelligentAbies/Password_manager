@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 public class CustomButton extends JButton {
     private Color defaultColor = new Color(230,230,230);
     private Color hoverColor = new Color(200,200,200);
+    private Color clickColor = new Color(180,180,180);
     public CustomButton() {
         super();
         init();
@@ -18,20 +19,23 @@ public class CustomButton extends JButton {
     }
 
     private void init(){
-        setBackground(defaultColor);
-        addMouseListener(new MouseListener());
+        setContentAreaFilled(false);
         setBorderPainted(false);
-        setOpaque(true);
     }
-    public class MouseListener extends MouseAdapter {
-        @Override
-        public void mouseEntered(MouseEvent evt) {
-            setBackground(hoverColor);
-        }
 
-        @Override
-        public void mouseExited(MouseEvent evt) {
-            setBackground(defaultColor);
+    //sono impazzito per trovare sta roba
+    @Override
+    protected void paintComponent(Graphics g) {
+        Color bg;
+        if (getModel().isPressed()) {
+            bg = clickColor;
+        } else if (getModel().isRollover()) {
+            bg = hoverColor;
+        } else {
+            bg = defaultColor;
         }
+        g.setColor(bg);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        super.paintComponent(g);
     }
 }
