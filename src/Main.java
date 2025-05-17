@@ -13,7 +13,7 @@ public class Main {
             //Sta roba serve solo per fare in modo che le immagini poi vengono caricate nel binario
             InputStream is = Main.class.getResourceAsStream("/shield.png");
             ImageIcon logo = new ImageIcon(ImageIO.read(is));
-            Image scaledLogo = logo.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+            Image scaledLogo = logo.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
             frame.setIconImage(scaledLogo);
         } catch (IOException e) {
             throw new RuntimeException(e);
