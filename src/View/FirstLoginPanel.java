@@ -1,6 +1,7 @@
 package View;
 
 import View.CustomElements.CustomButton;
+import View.CustomElements.CustomPasswordField;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,8 +17,8 @@ public class FirstLoginPanel extends JPanel {
     protected JLabel label;
     protected CustomButton btnLogin;
     protected JToggleButton btnShowPassword;
-    protected JPasswordField txtPassword;
-    protected JPasswordField txtPasswordConfirm;
+    protected CustomPasswordField txtPassword;
+    protected CustomPasswordField txtPasswordConfirm;
     protected JLabel lblSecurityLevel;
     protected JPanel labelPasswordPanel;
     protected JPanel passwordInsertionPanel;
@@ -83,14 +84,8 @@ public class FirstLoginPanel extends JPanel {
         passwordInsertionPanel.add(Box.createRigidArea(new Dimension(22, 0)));
 
         //primo campo password
-        txtPassword = new JPasswordField();
-        txtPassword.setCaretColor(Color.WHITE);
-        txtPassword.setForeground(Color.WHITE);
-        txtPassword.setBackground(new Color(35,35,35));
+        txtPassword = new CustomPasswordField();
         txtPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
-        txtPassword.setPreferredSize(new Dimension(200, 20));
-        txtPassword.setMaximumSize(new Dimension(200, 20));
-        txtPassword.setMinimumSize(new Dimension(200, 20));
         txtPassword.addActionListener(focusListener);
         passwordInsertionPanel.add(txtPassword);
 
@@ -120,14 +115,8 @@ public class FirstLoginPanel extends JPanel {
         add(labelPasswordConfirmPanel);
 
         //secondo campo password
-        txtPasswordConfirm = new JPasswordField();
-        txtPasswordConfirm.setCaretColor(Color.WHITE);
-        txtPasswordConfirm.setForeground(Color.WHITE);
-        txtPasswordConfirm.setBackground(new Color(35,35,35));
+        txtPasswordConfirm = new CustomPasswordField();
         txtPasswordConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
-        txtPasswordConfirm.setPreferredSize(new Dimension(200, 20));
-        txtPasswordConfirm.setMaximumSize(new Dimension(200, 20));
-        txtPasswordConfirm.setMinimumSize(new Dimension(200, 20));
         add(txtPasswordConfirm);
 
         spacerBelowPasswordConfirmPanel= Box.createRigidArea(new Dimension(0, 10));
@@ -176,7 +165,7 @@ public class FirstLoginPanel extends JPanel {
         border.setTitleColor(Color.WHITE);
         setBorder(border);
 
-        setPreferredSize (new Dimension(850, 400));
+        setPreferredSize (new Dimension(750, 400));
         setBackground(new Color(35,35,35));
     }
 

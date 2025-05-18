@@ -1,6 +1,7 @@
 package View;
 
 import View.CustomElements.CustomButton;
+import View.CustomElements.CustomTextField;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,11 +16,11 @@ public class AddCredentialPanel extends JPanel {
     protected JLabel lblEmail;
     protected JLabel lblPhoneNumber;
     protected JLabel lblPassword;
-    protected JTextField txtSite;
-    protected JTextField txtUsername;
-    protected JTextField txtEmail;
-    protected JTextField txtPhoneNumber;
-    protected JTextField txtPassword;
+    protected CustomTextField txtSite;
+    protected CustomTextField txtUsername;
+    protected CustomTextField txtEmail;
+    protected CustomTextField txtPhoneNumber;
+    protected CustomTextField txtPassword;
     protected CustomButton btnSave;
     protected CustomButton btnShowAll;
     protected CustomButton btnClear;
@@ -54,30 +55,16 @@ public class AddCredentialPanel extends JPanel {
         lblPassword.setForeground(Color.WHITE);
 
         // Campi di testo
-        txtSite = new JTextField(20);
-        txtSite.setCaretColor(Color.WHITE);
-        txtSite.setForeground(Color.WHITE);
-        txtSite.setBackground(new Color(35,35,35));
+        txtSite = new CustomTextField(20);
         txtSite.addActionListener(focusListener);
-        txtUsername = new JTextField(20);
-        txtUsername.setCaretColor(Color.WHITE);
-        txtUsername.setForeground(Color.WHITE);
-        txtUsername.setBackground(new Color(35,35,35));
+        txtUsername = new CustomTextField(20);
         txtUsername.addActionListener(focusListener);
-        txtEmail = new JTextField(20);
-        txtEmail.setCaretColor(Color.WHITE);
-        txtEmail.setForeground(Color.WHITE);
-        txtEmail.setBackground(new Color(35,35,35));
+        txtEmail = new CustomTextField(20);
         txtEmail.addActionListener(focusListener);
-        txtPhoneNumber = new JTextField(20);
+        txtPhoneNumber = new CustomTextField(20);
         txtPhoneNumber.setCaretColor(Color.WHITE);
-        txtPhoneNumber.setForeground(Color.WHITE);
-        txtPhoneNumber.setBackground(new Color(35,35,35));
         txtPhoneNumber.addActionListener(focusListener);
-        txtPassword = new JTextField(20);
-        txtPassword.setCaretColor(Color.WHITE);
-        txtPassword.setForeground(Color.WHITE);
-        txtPassword.setBackground(new Color(35,35,35));
+        txtPassword = new CustomTextField(20);
 
         // Pulsanti
         btnSave= new CustomButton("Salva");
@@ -147,7 +134,7 @@ public class AddCredentialPanel extends JPanel {
         border.setTitleColor(Color.WHITE);
         setBorder(border);
 
-        setPreferredSize (new Dimension(850, 400));
+        setPreferredSize (new Dimension(750, 400));
         setBackground(new Color(35,35,35));
     }
 

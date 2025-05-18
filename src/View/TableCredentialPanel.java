@@ -95,7 +95,7 @@ public class TableCredentialPanel extends JPanel {
         border.setTitleColor(Color.WHITE);
         setBorder(border);
 
-        setPreferredSize (new Dimension(850, 400));
+        setPreferredSize (new Dimension(750, 400));
         setBackground(new Color(35,35,35));
     }
 
