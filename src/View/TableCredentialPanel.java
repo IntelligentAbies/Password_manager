@@ -125,10 +125,22 @@ public class TableCredentialPanel extends JPanel {
 
     private class CustomTableCellRenderer extends DefaultTableCellRenderer {
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus,
-                                                       int row, int column) {
-            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component c;
+            //colonna del campo password
+            if (column == 4) {
+                //mostra la password in chiaro se la cella è selezionata
+                if (table.getSelectedRow() == row && table.getSelectedColumn() == column) {
+                    c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                }
+                else{
+                    String passwordHided = "•".repeat(String.valueOf(value).length());
+                    c = super.getTableCellRendererComponent(table, passwordHided, isSelected, hasFocus, row, column);
+                }
+            }
+            else{
+                c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
             c.setForeground(Color.WHITE); // Colore del testo
             c.setBackground(new Color(35, 35, 35)); // Colore di sfondo
             return c;
