@@ -41,17 +41,16 @@ public class FirstLoginPanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         showPasswordIcon= new ImageIcon(showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
         hidePasswordIcon= new ImageIcon(hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
 
-        //Layout in colonna
+        //layout in colonna
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        //Glue sopra per spingere il gruppo verso il centro
+        //glue sopra per spingere il gruppo verso il centro
         add(Box.createVerticalGlue());
 
-        //Prima label
+        //prima label
         label=new JLabel("Crea La Tua Password Per Iniziare!");
         label.setForeground(Color.WHITE);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -110,7 +109,7 @@ public class FirstLoginPanel extends JPanel {
         labelPasswordConfirmPanel.setBackground(new Color(35,35,35));
         labelPasswordConfirmPanel.setLayout(new BoxLayout(labelPasswordConfirmPanel, BoxLayout.X_AXIS));
 
-        //label password
+        //label conferma password
         lblPasswordConfirm=new JLabel("Conferma: ");
         lblPasswordConfirm.setAlignmentX(Component.RIGHT_ALIGNMENT);
         lblPasswordConfirm.setForeground(Color.WHITE);
@@ -144,16 +143,15 @@ public class FirstLoginPanel extends JPanel {
         lblSecurityLevel.setForeground(Color.RED);
         lblSecurityLevel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
         labelPasswordPanel.add(lblSecurityIndicator);
         labelPasswordPanel.add(lblSecurityLevel);
         add(labelPasswordPanel);
-
 
         //Spazio fisso tra field e bottone
         spacerBelowSecurityLabel=Box.createRigidArea(new Dimension(0, 10));
         add(spacerBelowSecurityLabel);
 
+        //bottone di login
         btnLogin = new CustomButton("Login");
         btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
         Dimension d =new Dimension(200, 25);
@@ -162,7 +160,7 @@ public class FirstLoginPanel extends JPanel {
         btnLogin.setMinimumSize(d);
         add(btnLogin);
 
-        // Glue sotto per spingere il gruppo verso il centro
+        // Glue sotto per spingere il tutto
         add(Box.createVerticalGlue());
 
         TitledBorder border = BorderFactory.createTitledBorder(

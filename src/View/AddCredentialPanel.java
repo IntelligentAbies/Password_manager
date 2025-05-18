@@ -50,7 +50,6 @@ public class AddCredentialPanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         showPasswordIcon= new ImageIcon(showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
         hidePasswordIcon= new ImageIcon(hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
         generatePasswordIcon = new ImageIcon(generatePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
@@ -61,13 +60,14 @@ public class AddCredentialPanel extends JPanel {
         gridPanel.setBackground(new Color(35,35,35));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        // Margini di ogni griglia
+
+        //margini di ogni griglia
         gbc.insets = new Insets(5, 5, 5, 5);
 
         //gli elementi si "strechano" orizontalmente
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Etichette
+        //ctichette
         lblMessage = new JLabel("Inserisci Le tue credenziali per salvarle!");
         lblMessage.setForeground(Color.WHITE);
         lblSite = new JLabel("Sito:");
@@ -81,7 +81,7 @@ public class AddCredentialPanel extends JPanel {
         lblPassword = new JLabel("Password:");
         lblPassword.setForeground(Color.WHITE);
 
-        // Campi di testo
+        //campi di testo
         txtSite = new CustomTextField(20);
         txtSite.addActionListener(focusListener);
         txtUsername = new CustomTextField(20);
@@ -93,7 +93,7 @@ public class AddCredentialPanel extends JPanel {
         txtPhoneNumber.addActionListener(focusListener);
         txtPassword = new CustomPasswordField(20);
 
-        // Pulsanti
+        //pulsanti
         btnSave= new CustomButton("Salva");
         btnShowAll = new CustomButton("Visualizza Tutti");
         btnClear = new CustomButton("Cancella");
@@ -111,7 +111,7 @@ public class AddCredentialPanel extends JPanel {
         btnGeneratePassword.setMargin(new Insets(0, 0, 0, 0)); // Rimuove i margini
         btnGeneratePassword.addActionListener(new GeneratePasswordListener());
 
-        // Posizionamento componenti
+        //posizionamento componenti
         gbc.gridx = 0;
         gbc.gridy = 0;
         gridPanel.add(lblMessage, gbc);
@@ -153,7 +153,7 @@ public class AddCredentialPanel extends JPanel {
         gbc.gridx = 4;
         gridPanel.add(btnGeneratePassword, gbc);
 
-        // Pannello per i pulsanti
+        //pannello per i pulsanti
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(new Color(35,35,35));
         buttonPanel.add(btnSave);
@@ -165,6 +165,7 @@ public class AddCredentialPanel extends JPanel {
         gridPanel.add(buttonPanel, gbc);
         add(gridPanel,BorderLayout.CENTER);
 
+        //aggiunta bottone cambio scheda
         JPanel showAllPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         showAllPanel.setBackground(new Color(35,35,35));
         showAllPanel.add(btnShowAll);

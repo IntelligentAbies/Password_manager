@@ -19,21 +19,22 @@ public class TableCredentialPanel extends JPanel {
     public TableCredentialPanel() {
         setLayout(new BorderLayout());
 
-
+        //bottoni
         btnCreate = new CustomButton("Aggiungi");
-
         btnRemove = new CustomButton("Rimuovi");
-
         btnFilter = new CustomButton("Filtra");
 
+        //campo di testo per il filtro
         txtFilter = new JTextField(20);
         txtFilter.setCaretColor(Color.WHITE);
         txtFilter.setForeground(Color.WHITE);
         txtFilter.setBackground(new Color(35,35,35));
 
+        //label per il filtro
         lblFilter = new JLabel("Filtra Per: ");
         lblFilter.setForeground(Color.WHITE);
 
+        //combo box per il filtro
         cbType = new JComboBox<>(new String[]{"Sito", "Username", "Email", "Telefono","Nessun Filtro"});
         cbType.setEditable(false);
         cbType.setBackground(new Color(35,35,35));
@@ -66,7 +67,6 @@ public class TableCredentialPanel extends JPanel {
         // creazione tabella
         String[] columnNames = {"Sito", "Username", "Email", "Telefono", "Password"};
 
-
         tableModel = new DefaultTableModel(columnNames, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -84,11 +84,10 @@ public class TableCredentialPanel extends JPanel {
             table.getColumnModel().getColumn(i).setCellRenderer(renderer);
         }
 
-        //inserimento della table in un scrollPane
+        //inserimento della tabella in un scrollPane
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
-        //Aggiungi bordi e titolo
         TitledBorder border = BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(),
                 "Password Manager"
