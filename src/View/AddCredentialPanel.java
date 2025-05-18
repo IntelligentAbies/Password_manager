@@ -22,12 +22,16 @@ public class AddCredentialPanel extends JPanel {
     protected JTextField txtPassword;
     protected CustomButton btnSave;
     protected CustomButton btnShowAll;
+    protected CustomButton btnClear;
     protected JPanel buttonPanel;
     protected FocusListener focusListener=new FocusListener();
 
     public AddCredentialPanel() {
-        // Configura il layout del pannello
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+
+        JPanel gridPanel = new JPanel(new GridBagLayout());
+        gridPanel.setBackground(new Color(35,35,35));
+
         GridBagConstraints gbc = new GridBagConstraints();
         // Margini di ogni griglia
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -78,56 +82,63 @@ public class AddCredentialPanel extends JPanel {
         // Pulsanti
         btnSave= new CustomButton("Salva");
         btnShowAll = new CustomButton("Visualizza Tutti");
+        btnClear = new CustomButton("Cancella");
+        btnClear.addActionListener(new ClearListener());
 
 
         // Posizionamento componenti
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(lblMessage, gbc);
+        gridPanel.add(lblMessage, gbc);
 
         gbc.gridy = 1;
-        add(lblSite, gbc);
+        gridPanel.add(lblSite, gbc);
 
         gbc.gridy = 2;
-        add(lblUsername, gbc);
+        gridPanel.add(lblUsername, gbc);
 
         gbc.gridy = 3;
-        add(lblEmail, gbc);
+        gridPanel.add(lblEmail, gbc);
 
         gbc.gridy = 4;
-        add(lblPhoneNumber, gbc);
+        gridPanel.add(lblPhoneNumber, gbc);
 
         gbc.gridy = 5;
-        add(lblPassword, gbc);
+        gridPanel.add(lblPassword, gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 1;
-        add(txtSite, gbc);
+        gridPanel.add(txtSite, gbc);
 
         gbc.gridy = 2;
-        add(txtUsername, gbc);
+        gridPanel.add(txtUsername, gbc);
 
         gbc.gridy = 3;
-        add(txtEmail, gbc);
+        gridPanel.add(txtEmail, gbc);
 
         gbc.gridy = 4;
-        add(txtPhoneNumber, gbc);
+        gridPanel.add(txtPhoneNumber, gbc);
 
         gbc.gridy = 5;
-        add(txtPassword, gbc);
+        gridPanel.add(txtPassword, gbc);
 
         // Pannello per i pulsanti
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(new Color(35,35,35));
         buttonPanel.add(btnSave);
-        buttonPanel.add(btnShowAll);
+        buttonPanel.add(btnClear);
 
         gbc.gridx = 1;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
-        add(buttonPanel, gbc);
+        gridPanel.add(buttonPanel, gbc);
+        add(gridPanel,BorderLayout.CENTER);
+        //add(Box.createVerticalGlue());
 
-        add(Box.createVerticalGlue());
+        JPanel showAllPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        showAllPanel.setBackground(new Color(35,35,35));
+        showAllPanel.add(btnShowAll);
+        add(showAllPanel,BorderLayout.NORTH);
 
         TitledBorder border = BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(),
@@ -174,6 +185,12 @@ public class AddCredentialPanel extends JPanel {
 
     public JTextField getTxtSite() {
         return txtSite;
+    }
+
+    public class ClearListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            clear();
+        }
     }
 
     public class FocusListener implements ActionListener {

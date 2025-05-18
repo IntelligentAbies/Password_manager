@@ -20,9 +20,9 @@ public class TableCredentialPanel extends JPanel {
         setLayout(new BorderLayout());
 
 
-        btnCreate = new CustomButton("Aggiungi Delle Credenziali");
+        btnCreate = new CustomButton("Aggiungi");
 
-        btnRemove = new CustomButton("Rimuovi Delle Credenziali");
+        btnRemove = new CustomButton("Rimuovi");
 
         btnFilter = new CustomButton("Filtra");
 

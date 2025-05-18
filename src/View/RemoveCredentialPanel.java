@@ -11,7 +11,7 @@ public class RemoveCredentialPanel extends AddCredentialPanel{
     private CustomButton btnShow;
     public RemoveCredentialPanel() {
         super();
-        lblMessage.setText("Inserisci Sito e Username delle credenziali da rimuovere!");
+        lblMessage.setText("Inserisci Sito e Username da rimuovere!");
         txtUsername.removeActionListener(focusListener);
         txtEmail.setEditable(false);
         txtEmail.removeActionListener(focusListener);
