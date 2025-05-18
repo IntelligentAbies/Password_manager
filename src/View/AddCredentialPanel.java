@@ -1,5 +1,6 @@
 package View;
 
+import Utils.IsSecureUtil;
 import View.CustomElements.CustomButton;
 import View.CustomElements.CustomPasswordField;
 import View.CustomElements.CustomTextField;
@@ -29,8 +30,10 @@ public class AddCredentialPanel extends JPanel {
     protected CustomButton btnShowAll;
     protected CustomButton btnClear;
     protected JToggleButton btnShowPassword;
+    protected JButton btnGeneratePassword;
     protected ImageIcon showPasswordIcon;
     protected ImageIcon hidePasswordIcon;
+    protected ImageIcon generatePasswordIcon;
     protected JPanel buttonPanel;
     protected FocusListener focusListener=new FocusListener();
 
@@ -42,12 +45,15 @@ public class AddCredentialPanel extends JPanel {
             showPasswordIcon = new ImageIcon(ImageIO.read(is));
             is = getClass().getResourceAsStream("/uncover_light.png");
             hidePasswordIcon = new ImageIcon(ImageIO.read(is));
+            is = getClass().getResourceAsStream("/generate.png");
+            generatePasswordIcon = new ImageIcon(ImageIO.read(is));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         showPasswordIcon= new ImageIcon(showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
         hidePasswordIcon= new ImageIcon(hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        generatePasswordIcon = new ImageIcon(generatePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
 
         setLayout(new BorderLayout());
 
@@ -98,6 +104,12 @@ public class AddCredentialPanel extends JPanel {
         btnShowPassword.setFocusPainted(false); // Rimuove La cornice dopo che hai premuto
         btnShowPassword.setMargin(new Insets(0, 0, 0, 0)); // Rimuove i margini
         btnShowPassword.addActionListener(new ShowPasswordListener());
+        btnGeneratePassword = new JButton(generatePasswordIcon);
+        btnGeneratePassword.setBorderPainted(false); // Rimuove il bordo
+        btnGeneratePassword.setContentAreaFilled(false); // Rimuove lo sfondo
+        btnGeneratePassword.setFocusPainted(false); // Rimuove La cornice dopo che hai premuto
+        btnGeneratePassword.setMargin(new Insets(0, 0, 0, 0)); // Rimuove i margini
+        btnGeneratePassword.addActionListener(new GeneratePasswordListener());
 
         // Posizionamento componenti
         gbc.gridx = 0;
@@ -137,6 +149,9 @@ public class AddCredentialPanel extends JPanel {
 
         gbc.gridx = 3;
         gridPanel.add(btnShowPassword, gbc);
+
+        gbc.gridx = 4;
+        gridPanel.add(btnGeneratePassword, gbc);
 
         // Pannello per i pulsanti
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -238,6 +253,12 @@ public class AddCredentialPanel extends JPanel {
                 btnShowPassword.setIcon(showPasswordIcon);
             }
             txtPassword.setText(text);
+        }
+    }
+
+    public class GeneratePasswordListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            txtPassword.setText(IsSecureUtil.generateSecurePassword());
         }
     }
 }

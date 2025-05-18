@@ -21,6 +21,7 @@ public class RemoveCredentialPanel extends AddCredentialPanel{
         btnSave.setText("Rimuovi");
         btnShow = new CustomButton("Cerca");
         buttonPanel.add(btnShow);
+
     }
 
     public JButton getBtnShow() {
