@@ -41,11 +41,9 @@ public class FirstLoginPanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Image scaledShowImage = showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
-        Image scaledHideImage = hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 
-        showPasswordIcon= new ImageIcon(scaledShowImage);
-        hidePasswordIcon= new ImageIcon(scaledHideImage);
+        showPasswordIcon= new ImageIcon(showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        hidePasswordIcon= new ImageIcon(hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
 
         //Layout in colonna
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -83,8 +81,13 @@ public class FirstLoginPanel extends JPanel {
 
         passwordInsertionPanel.add(Box.createRigidArea(new Dimension(22, 0)));
 
+        Dimension passwordFieldDim = new Dimension(200, 20);
+
         //primo campo password
         txtPassword = new CustomPasswordField();
+        txtPassword.setPreferredSize(passwordFieldDim);
+        txtPassword.setMaximumSize(passwordFieldDim);
+        txtPassword.setMinimumSize(passwordFieldDim);
         txtPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
         txtPassword.addActionListener(focusListener);
         passwordInsertionPanel.add(txtPassword);
@@ -96,6 +99,7 @@ public class FirstLoginPanel extends JPanel {
         btnShowPassword.setContentAreaFilled(false); // Rimuove lo sfondo
         btnShowPassword.setFocusPainted(false); // Rimuove La cornice dopo che hai premuto
         btnShowPassword.setMargin(new Insets(0, 0, 0, 0)); // Rimuove i margini
+        btnShowPassword.addActionListener(new ShowPasswordListener());
         passwordInsertionPanel.add(btnShowPassword);
 
         add(passwordInsertionPanel);
@@ -117,6 +121,9 @@ public class FirstLoginPanel extends JPanel {
         //secondo campo password
         txtPasswordConfirm = new CustomPasswordField();
         txtPasswordConfirm.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtPasswordConfirm.setPreferredSize(passwordFieldDim);
+        txtPasswordConfirm.setMaximumSize(passwordFieldDim);
+        txtPasswordConfirm.setMinimumSize(passwordFieldDim);
         add(txtPasswordConfirm);
 
         spacerBelowPasswordConfirmPanel= Box.createRigidArea(new Dimension(0, 10));
@@ -203,6 +210,21 @@ public class FirstLoginPanel extends JPanel {
             if(e.getSource()==txtPassword){
                 txtPasswordConfirm.requestFocus();
             }
+        }
+    }
+
+    public class ShowPasswordListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String text = txtPassword.getText();
+            if(btnShowPassword.getModel().isSelected()){
+                txtPassword.setEchoChar((char) 0);
+                btnShowPassword.setIcon(hidePasswordIcon);
+            }
+            else{
+                txtPassword.setEchoChar('•');
+                btnShowPassword.setIcon(showPasswordIcon);
+            }
+            txtPassword.setText(text);
         }
     }
 }

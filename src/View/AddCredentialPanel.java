@@ -1,13 +1,17 @@
 package View;
 
 import View.CustomElements.CustomButton;
+import View.CustomElements.CustomPasswordField;
 import View.CustomElements.CustomTextField;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class AddCredentialPanel extends JPanel {
     protected JLabel lblMessage;
@@ -20,14 +24,31 @@ public class AddCredentialPanel extends JPanel {
     protected CustomTextField txtUsername;
     protected CustomTextField txtEmail;
     protected CustomTextField txtPhoneNumber;
-    protected CustomTextField txtPassword;
+    protected CustomPasswordField txtPassword;
     protected CustomButton btnSave;
     protected CustomButton btnShowAll;
     protected CustomButton btnClear;
+    protected JToggleButton btnShowPassword;
+    protected ImageIcon showPasswordIcon;
+    protected ImageIcon hidePasswordIcon;
     protected JPanel buttonPanel;
     protected FocusListener focusListener=new FocusListener();
 
     public AddCredentialPanel() {
+        //mi carico le icone
+        try {
+            //Sta roba serve solo per fare in modo che le immagini poi vengono caricate nel binario
+            InputStream is = getClass().getResourceAsStream("/discover_light.png");
+            showPasswordIcon = new ImageIcon(ImageIO.read(is));
+            is = getClass().getResourceAsStream("/uncover_light.png");
+            hidePasswordIcon = new ImageIcon(ImageIO.read(is));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        showPasswordIcon= new ImageIcon(showPasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+        hidePasswordIcon= new ImageIcon(hidePasswordIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
+
         setLayout(new BorderLayout());
 
         JPanel gridPanel = new JPanel(new GridBagLayout());
@@ -64,14 +85,19 @@ public class AddCredentialPanel extends JPanel {
         txtPhoneNumber = new CustomTextField(20);
         txtPhoneNumber.setCaretColor(Color.WHITE);
         txtPhoneNumber.addActionListener(focusListener);
-        txtPassword = new CustomTextField(20);
+        txtPassword = new CustomPasswordField(20);
 
         // Pulsanti
         btnSave= new CustomButton("Salva");
         btnShowAll = new CustomButton("Visualizza Tutti");
         btnClear = new CustomButton("Cancella");
         btnClear.addActionListener(new ClearListener());
-
+        btnShowPassword = new JToggleButton(showPasswordIcon);
+        btnShowPassword.setBorderPainted(false); // Rimuove il bordo
+        btnShowPassword.setContentAreaFilled(false); // Rimuove lo sfondo
+        btnShowPassword.setFocusPainted(false); // Rimuove La cornice dopo che hai premuto
+        btnShowPassword.setMargin(new Insets(0, 0, 0, 0)); // Rimuove i margini
+        btnShowPassword.addActionListener(new ShowPasswordListener());
 
         // Posizionamento componenti
         gbc.gridx = 0;
@@ -109,6 +135,9 @@ public class AddCredentialPanel extends JPanel {
         gbc.gridy = 5;
         gridPanel.add(txtPassword, gbc);
 
+        gbc.gridx = 3;
+        gridPanel.add(btnShowPassword, gbc);
+
         // Pannello per i pulsanti
         buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBackground(new Color(35,35,35));
@@ -120,7 +149,6 @@ public class AddCredentialPanel extends JPanel {
         gbc.gridwidth = 2;
         gridPanel.add(buttonPanel, gbc);
         add(gridPanel,BorderLayout.CENTER);
-        //add(Box.createVerticalGlue());
 
         JPanel showAllPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         showAllPanel.setBackground(new Color(35,35,35));
@@ -195,6 +223,21 @@ public class AddCredentialPanel extends JPanel {
             else if(e.getSource() == txtPhoneNumber){
                 txtPassword.requestFocus();
             }
+        }
+    }
+
+    public class ShowPasswordListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String text = txtPassword.getText();
+            if(btnShowPassword.getModel().isSelected()){
+                txtPassword.setEchoChar((char) 0);
+                btnShowPassword.setIcon(hidePasswordIcon);
+            }
+            else{
+                txtPassword.setEchoChar('•');
+                btnShowPassword.setIcon(showPasswordIcon);
+            }
+            txtPassword.setText(text);
         }
     }
 }

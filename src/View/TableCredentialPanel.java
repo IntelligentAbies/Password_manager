@@ -77,6 +77,7 @@ public class TableCredentialPanel extends JPanel {
         JTable table = new JTable(tableModel);
         table.setBackground(new Color(35,35,35));
         table.setFillsViewportHeight(true);
+        table.getTableHeader().setReorderingAllowed(false);
 
         CustomTableCellRenderer renderer = new CustomTableCellRenderer();
         for (int i = 0; i < table.getColumnCount(); i++) {

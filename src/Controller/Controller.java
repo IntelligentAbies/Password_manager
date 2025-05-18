@@ -40,12 +40,10 @@ public class Controller implements ActionListener, DocumentListener {
         //Listener per la schermata di registrazione
         mainPanel.getFirstLoginPanel().getBtnLogin().addActionListener(this);
         mainPanel.getFirstLoginPanel().getTxtPassword().getDocument().addDocumentListener(this);
-        mainPanel.getFirstLoginPanel().getBtnShowPassword().addActionListener(this);
         mainPanel.getFirstLoginPanel().getTxtPasswordConfirm().addActionListener(this);
 
         //Listener per la schermata di login
         mainPanel.getNormalLoginPanel().getBtnLogin().addActionListener(this);
-        mainPanel.getNormalLoginPanel().getBtnShowPassword().addActionListener(this);
         mainPanel.getNormalLoginPanel().getTxtPassword().addActionListener(this);
 
         //Listener per la schermata di visualizzazione
@@ -210,34 +208,12 @@ public class Controller implements ActionListener, DocumentListener {
         }
     }
 
-    public void showPassword(JToggleButton btnShowPassword,JPasswordField txtPassword){
-        String text = txtPassword.getText();
-        if(btnShowPassword.getModel().isSelected()){
-            txtPassword.setEchoChar((char) 0);
-            btnShowPassword.setIcon(mainPanel.getFirstLoginPanel().getHidePasswordIcon());
-        }
-        else{
-            txtPassword.setEchoChar('•');
-            btnShowPassword.setIcon(mainPanel.getFirstLoginPanel().getShowPasswordIcon());
-        }
-        txtPassword.setText(text);
-    }
 
     //Actionlistener
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mainPanel.getFirstLoginPanel().getBtnLogin()||e.getSource()==mainPanel.getFirstLoginPanel().getTxtPasswordConfirm()){
             register();
-        }
-        else if(e.getSource()==mainPanel.getFirstLoginPanel().getBtnShowPassword()){
-            JToggleButton btnShowPassword = mainPanel.getFirstLoginPanel().getBtnShowPassword();
-            JPasswordField txtPassword = mainPanel.getFirstLoginPanel().getTxtPassword();
-            showPassword(btnShowPassword,txtPassword);
-        }
-        else if(e.getSource()==mainPanel.getNormalLoginPanel().getBtnShowPassword()){
-            JToggleButton btnShowPassword = mainPanel.getNormalLoginPanel().getBtnShowPassword();
-            JPasswordField txtPassword = mainPanel.getNormalLoginPanel().getTxtPassword();
-            showPassword(btnShowPassword,txtPassword);
         }
         else if(e.getSource()==mainPanel.getNormalLoginPanel().getBtnLogin()||e.getSource()==mainPanel.getNormalLoginPanel().getTxtPassword()){
             login();
